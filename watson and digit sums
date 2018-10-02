@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define mod 1000000007
+using namespace std;
+
+int main()
+{
+    int tc;
+    cin>>tc;
+    while(tc--)
+    {
+        int n;
+        cin>>n;
+        double a[n],b[n];
+        set<int>s;
+        int j=0;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+            s.insert(a[i]);
+            if(s.find(a[i])!=s.end())
+                {b[j]=a[i];j++;}
+            else
+                continue;
+        }
+        sort(b,b+j,greater<int>());
+        long int  cnt=0;
+        for(int i=0;i<j-1;i++)
+        {
+            for(int k=0;k<j;k++)
+            {
+                double d=b[i]/b[k];
+                if(floor(d)==(int)d and ceil(d)==(int)d and b[i]!=b[k])
+                    cnt=(cnt%mod+1)%mod;
+                    //cout << b[i]<< " "<<b[k]<< " "<<cnt<< " "<<d<<endl;
+            }
+        }
+        cnt=((cnt%mod)+(j%mod))%mod;
+        cout<< cnt<<endl;
+    }
+    return 0;
+}
